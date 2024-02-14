@@ -1,17 +1,11 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable camelcase */
 import db from '../db/dbconfig.js';
 
 class Editora {
-  constructor({
-    id,
-    nome,
-    cidade,
-    email,
-    created_at,
-    updated_at,
-  }) {
-    this.id = id || null;
+  constructor({ id, nome, cidade, email, created_at, updated_at }) {
+    this.id = null || id;
     this.nome = nome;
     this.cidade = cidade;
     this.email = email;
@@ -29,14 +23,10 @@ class Editora {
   }
 
   async criar() {
-    const novaEditora = {
-      nome: this.nome,
-      cidade: this.cidade,
-      email: this.email,
-      created_at: this.created_at,
-      updated_at: this.updated_at,
-    };
-    return db('editoras').insert(novaEditora);
+    return db('editoras')
+      .insert(this)
+      .then((registroCriado) => db('editoras').where('id', registroCriado[0]))
+      .then((registroSelecionado) => new Editora(registroSelecionado[0]));
   }
 
   async atualizar(id) {
@@ -50,9 +40,7 @@ class Editora {
 
   static async excluir(id) {
     // o del retorna a quantidade de rows deletados
-    return db('editoras')
-      .where({ id })
-      .del();
+    return db('editoras').where({ id }).del();
   }
 
   async salvar() {
@@ -66,8 +54,7 @@ class Editora {
   }
 
   static async pegarLivrosPorEditora(editoraId) {
-    return db('livros')
-      .where({ editora_id: editoraId });
+    return db('livros').where({ editora_id: editoraId });
   }
 }
 
