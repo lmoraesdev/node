@@ -1,4 +1,3 @@
-// eslint-disable-next-line object-curly-newline
 import { describe, expect, it } from '@jest/globals';
 import Evento from '../../models/evento.js';
 

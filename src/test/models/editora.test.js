@@ -1,6 +1,6 @@
-import {
-  describe, expect, it, jest,
-} from '@jest/globals';
+/* eslint-disable comma-dangle */
+// eslint-disable-next-line object-curly-newline
+import { describe, expect, it, jest } from '@jest/globals';
 import Editora from '../../models/editora.js';
 
 describe('Testando o modelo Editora', () => {
@@ -13,9 +13,7 @@ describe('Testando o modelo Editora', () => {
   it('Deve instanciar uma nova editora', () => {
     const editora = new Editora(objetoEditora);
 
-    expect(editora).toEqual(
-      expect.objectContaining(objetoEditora),
-    );
+    expect(editora).toEqual(expect.objectContaining(objetoEditora));
   });
 
   it.skip('Deve salvar editora no BD', async () => {
@@ -31,7 +29,7 @@ describe('Testando o modelo Editora', () => {
         ...objetoEditora,
         created_at: expect.any(String),
         updated_at: expect.any(String),
-      }),
+      })
     );
   });
 
@@ -55,7 +53,7 @@ describe('Testando o modelo Editora', () => {
         ...objetoEditora,
         created_at: expect.any(String),
         updated_at: expect.any(String),
-      }),
+      })
     );
   });
 });
